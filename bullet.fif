@@ -1,0 +1,38 @@
+"Asm.fif" include
+// automatically generated from `stdlib.fc` `bullet.fc` 
+PROGRAM{
+  DECLPROC recv_internal
+  recv_internal PROC:<{
+    //  in_msg_cell in_msg
+    DROP	//  in_msg_cell
+    c4 PUSH	//  in_msg_cell _2
+    CTOS	//  in_msg_cell _3
+    SBITS	//  in_msg_cell _4
+    0 EQINT	//  in_msg_cell _6
+    IFJMP:<{	//  in_msg_cell
+      DROP	// 
+      1 PUSHINT	//  _7=1
+      NEWC	//  _7=1 _8
+      1 STU	//  _10
+      ENDC	//  _11
+      c4 POP
+    }>	//  in_msg_cell
+    CTOS	//  cs
+    4 LDU	//  _49 _48
+    NIP	//  cs
+    LDMSGADDR	//  _51 _50
+    DROP	//  s_addr
+    0 PUSHINT	//  s_addr _23=0
+    24 PUSHINT	//  s_addr _23=0 _24=24
+    NEWC	//  s_addr _23=0 _24=24 _25
+    6 STU	//  s_addr _23=0 _27
+    ROT	//  _23=0 _27 s_addr
+    STSLICER	//  _23=0 _28
+    OVER	//  _23=0 _28 _29=0
+    STGRAMS	//  _23=0 _30
+    107 STU	//  _44
+    ENDC	//  msg
+    160 PUSHINT	//  msg _46=160
+    SENDRAWMSG
+  }>
+}END>c

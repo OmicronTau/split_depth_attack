@@ -1,0 +1,57 @@
+"Asm.fif" include
+"bullet.fif" include =: bullet_code
+// automatically generated from `stdlib.fc` `trigger.fc` 
+PROGRAM{
+  DECLPROC init
+  DECLPROC addr
+  DECLPROC body
+  DECLPROC destroy
+  DECLPROC main
+  body PROCREF:<{
+   <b b{00110} s, bullet_code ref, <b b> ref, b>
+    PUSHREF DUMPSTK
+  }>
+  addr PROCREF:<{
+    <b 4 3 u,
+       -1 8 i,
+      <b b{00110} s, bullet_code ref, <b b> ref, b> hashu 256 u,
+    b> <s PUSHSLICE
+  }>
+  init PROCREF:<{
+    // 
+    body CALLDICT	//  _1
+    6 PUSHINT	//  _1 _4
+    24 PUSHINT	//  _1 _4 _5=24
+    NEWC	//  _1 _4 _5=24 _6
+    6 STU	//  _1 _4 _8
+    addr CALLDICT	//  _1 _4 _8 _9
+    STSLICER	//  _1 _4 _10
+    1000000000 PUSHINT	//  _1 _4 _10 _11=1000000000
+    STGRAMS	//  _1 _4 _12
+    108 STU	//  _1 _28
+    STREF	//  msg
+    ENDC	//  _30
+    1 PUSHINT	//  _30 _31=1
+    SENDRAWMSG
+  }>
+  destroy PROCREF:<{
+    // 
+    0 PUSHINT	//  _1=0
+    24 PUSHINT	//  _1=0 _2=24
+    NEWC	//  _1=0 _2=24 _3
+    6 STU	//  _1=0 _5
+    addr CALLDICT	//  _1=0 _5 _6
+    STSLICER	//  _1=0 _7
+    1000000000 PUSHINT	//  _1=0 _7 _8=1000000000
+    STGRAMS	//  _1=0 _9
+    107 STU	//  msg
+    ENDC	//  _24
+    1 PUSHINT	//  _24 _25=1
+    SENDRAWMSG
+  }>
+  main PROC:<{
+    // 
+    init INLINECALLDICT
+    destroy INLINECALLDICT
+  }>
+}END>c

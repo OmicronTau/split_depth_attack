@@ -1,0 +1,15 @@
+() recv_internal(cell in_msg_cell, slice in_msg) {
+  if( slice_bits(get_data().begin_parse()) == 0 ) {
+    begin_cell().store_uint(1,1).end_cell().set_data();
+    return ();
+  }
+  var cs = in_msg_cell.begin_parse();
+  var flags = cs~load_uint(4);  ;; int_msg_info$0 ihr_disabled:Bool bounce:Bool bounced:Bool
+  slice s_addr = cs~load_msg_addr();
+  var msg = begin_cell().store_uint(0x18, 6)
+                        .store_slice(s_addr)
+                        .store_grams(0)
+                        .store_uint(0, 1 + 4 + 4 + 64 + 32 + 1 + 1)
+            .end_cell();
+  send_raw_message(msg, 160);
+}

@@ -1,0 +1,30 @@
+#!/usr/bin/fift -s
+"TonUtil.fif" include
+"Asm.fif" include
+
+<{
+  SETCP0 ACCEPT
+  "trigger.fif" include PUSHREF SETCODE
+}>s =: contract_code
+
+<b b> =: contract_storage
+
+<b b{00110} s, <b contract_code s, b> ref, contract_storage ref, b>
+dup =: state_init
+
+dup hashu -1 swap 2constant contract_address
+."new trigger wallet address = " contract_address .addr cr
+
+
+."new trigger wallet address = " contract_address .addr cr
+
+."Non-bounceable address (for init): " contract_address 7 .Addr cr
+."Bounceable address (for later access): " contract_address 6 .Addr cr
+
+<b b> <s =: init_message
+<b b{1000100} s, contract_address addr, b{000010} s, state_init <s s, b{0} s, init_message s, b>
+2 boc+>B
+
+"query-init-trigger.boc" tuck B>file
+."(Saved adns contract creating query to file " type .")" cr
+
